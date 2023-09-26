@@ -4,7 +4,7 @@ import { Icon } from 'leaflet';
 import "leaflet/dist/leaflet.css"
 // import "./Map.css"
 
-export const Map = ({nameParking, latitud = 4.805826, longitud=-75.755963}) => {
+export const Map = ({nameParking, latitud, longitud}) => {
 
     const marker = {
         geocode: [],
