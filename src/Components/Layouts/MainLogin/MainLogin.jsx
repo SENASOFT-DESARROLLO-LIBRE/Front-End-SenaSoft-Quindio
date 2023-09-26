@@ -69,11 +69,11 @@ export const MainLogin = () => {
         else{
             sendUserData(User)
         }
-        
     }
-
-
-
+    const sendUserData = (userData) => {
+        // return axios.post('http://localhost:5000/api/users/registerParking', userData);
+        return axios.post('https://backend-space-parking.onrender.com/api/users/registerParking', userData);
+      };
 
 
 
@@ -92,7 +92,7 @@ export const MainLogin = () => {
             <FormGroup onChange={onSaveData} contLabel="Nombre" place="Nombre" nameInput="name" inputType="Text"/>
             <FormGroup onChange={onSaveData} contLabel="Correo" place="Correo" nameInput="email" inputType="email"/>
             <FormGroup onChange={onSaveData} contLabel="Contraseña" place="Contraseña" nameInput="password" inputType="password"/>
-            <FormGroup onChange={onSaveData} nameInput="confirmPassword" contLabel="Confirmar Contraseña" place="Contraseña" inputType="password" />
+            <FormGroup onChange={onSaveData} nameInput="confirmPassword" contLabel="Confirmar Contraseña" place=" ConfirmarContraseña" inputType="password" />
             
             
            <button id='btnCreateAccount' type='submit'>Crear Cuenta</button>

@@ -9,6 +9,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}></Route>
         <Route path='/Home' element={<Home/>}></Route>
+        <Route path="*" element="Not Found"></Route>
+      
       </Routes>
     </div>
   );
