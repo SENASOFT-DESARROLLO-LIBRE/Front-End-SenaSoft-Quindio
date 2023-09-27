@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { Map } from '../../Layouts/Map/Map'
+import { FormGroup } from '../../UI/FormGroup/Formgroup'
+
 
 
 export const Home = () => {
@@ -126,7 +128,10 @@ export const Home = () => {
 
 
           
-          <input  onChange={upFile} type="file"/>
+          {/* <input  onChange={upFile} type="file"/> */}
+          <FormGroup onChange={upFile} inputType={"file"}/>
+
+
           <button onClick={loadFile}>Subir Archivo</button>
         </aside>
     </div>

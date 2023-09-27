@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, useMapEvents, Popup} from "react-leaflet"
 import { Icon } from 'leaflet';
 import "leaflet/dist/leaflet.css"
+// import "../../."
 import { useRef } from 'react';
 
 // import "./Map.css"
 
 export const Map = ({nameParking, latitud, longitud}) => {
-
-    const marker = {
-        geocode: [],
-        popUp: nameParking
-      };
-      const [markerLocation, setMarkerLocation] = useState(null);
-      const markerRef = useRef(null);
+  
+  const marker = {
+      geocode: [],
+      popUp: nameParking
+    };
+    const [markerLocation, setMarkerLocation] = useState(null);
+    const markerRef = useRef(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false)
 
       const AddMarkerOnClick = ({ setMarkerLocation }) => {
         useMapEvents({
@@ -41,6 +43,13 @@ export const Map = ({nameParking, latitud, longitud}) => {
           setCenter([latitud, longitud]);
         }
       }, [latitud, longitud]);
+
+
+      useEffect(() => {
+        if (markerLocation) {
+          setIsPopupOpen(true);
+        }
+      }, [markerLocation]);
     
       const customIcon = new Icon({
         iconUrl: "https://res.cloudinary.com/dbenwgwfn/image/upload/v1682304566/Cancheros-Map/marcador-de-posicion_nrteik.png",
@@ -50,7 +59,7 @@ export const Map = ({nameParking, latitud, longitud}) => {
           return (
       <div className="Bg-MapParking">
         {/* <p className='messageMap'>Ubicación</p> */}
-      <MapContainer center={[latitud, longitud]} zoom={17} style={{width: 900, height: "100vh"}  }>
+      <MapContainer center={[latitud, longitud]} zoom={17} style={{width: "70vw", height: "100vh"}  }>
     <TileLayer 
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' 
@@ -60,10 +69,18 @@ export const Map = ({nameParking, latitud, longitud}) => {
       </Marker>
 
       {markerLocation && (
-          <Marker position={markerLocation} icon={customIcon}>
-            <Popup auto={true}>Tu ubicación seleccionada
-              <button>click</button>
+          <Marker ref={markerRef} position={markerLocation} icon={customIcon}>
+            {isPopupOpen &&(
+            <Popup className='popMarker'>
+              <p>¿Que acción desea realizar?</p>
+              <div className="contBtns">
+                <button>Establecer Origen</button>
+                <button>Agregar Punto</button>
+              </div>
+
+
             </Popup>
+            )}
           </Marker>
         )}
         <AddMarkerOnClick setMarkerLocation={setMarkerLocation} />
