@@ -21,8 +21,6 @@ export const Home = () => {
 
 
     
-    
-    
     const loadFile = () => {
       if (jsonFile) {
         const reader = new FileReader();
@@ -34,7 +32,7 @@ export const Home = () => {
             const jsonData = JSON.parse(contentFile);
             // console.log(jsonData);
             setGrafo(jsonData)
-            findOrigin()
+            findOrigin(jsonData)
 
             // Ahora jsonData contiene el objeto JavaScript correspondiente al archivo JSON
             // Puedes almacenarlo en tu estado o realizar otras acciones con él.
@@ -48,30 +46,62 @@ export const Home = () => {
         console.log("No se encontró ningún archivo.");
       }
     };
+
+
+    useEffect(() => {
+      loadFile();
+    }, []);
+
+
+    useEffect(() => {
+      // Este efecto se activará cada vez que ubiOrigin cambie
+      console.log("ubiOrigin actualizado:", ubiOrigin);
+    }, [ubiOrigin]);
         
-    const findOrigin = async () => {
-      if (grafo && grafo.ubicaciones) {
-        const ubicacionEncontrada = grafo.ubicaciones.find((ubi) => ubi.name === grafo.inicio);
-        
-        if (ubicacionEncontrada) {
-          setUbiOrigin(ubicacionEncontrada);
-        } else {
-          console.log(`No se encontró ninguna ubicación con el nombre ${grafo.inicio}`);
-        }
+    const findOrigin =  (jsonData) => {
+
+      if (jsonData && jsonData.ubicaciones) {
+        console.log(jsonData);
+    
+        jsonData.ubicaciones.forEach((ubi) => {
+          if (ubi?.nombre === jsonData?.inicio) {
+            setUbiOrigin(ubi)
+            console.log(ubi);
+            console.log(ubiOrigin);
+          }
+          // console.log(ubi.nombre);
+          // console.log(jsonData.inicio);
+        });
       } else {
-        console.log('No hay datos de ubicación disponibles en el grafo.');
+        console.log(`No se encontró ninguna ubicación con el nombre ${jsonData.inicio}`);
       }
+      
     };
     
+    // if (jsonData && jsonData?.ubicaciones) {
+    //   const ubicacionEncontrada = jsonData?.ubicaciones.find((ubi) => ubi.nombre === grafo?.inicio);
+    //   // console.log(ubi.name);
+      
+    //   if (ubicacionEncontrada) {
+    //     setUbiOrigin(ubicacionEncontrada);
+    //   } else {
+    //     console.log(`No se encontró ninguna ubicación con el nombre ${jsonData.inicio}`);
+    //   }
+    // } else {
+    //   console.log('No hay datos de ubicación disponibles en el grafo.');
+    // }4.805938-75.756070
+
+
+
     return (
       <div id='mainHome'>
-        <Map latitud={0} longitud={0}/>
-        <aside className='asideHome'>
+        <Map latitud={ubiOrigin ? ubiOrigin.posY : 4.805938} longitud={ubiOrigin ? ubiOrigin.posX : -75.756070} />
+          <aside className='asideHome'>
             <h2>Puntos De Entrega</h2>
             <ul>
             {grafo ? (
               grafo.ubicaciones.map((ubi, index) => (
-                <li key={index}>{ubi.nombre}, {ubi.posX}, {ubi.posY}</li>
+                <li key={index}>{ubi.nombre}, Lng-{ubi.posX}, Lat-{ubi.posY}</li>
               ))
             ) : (
               <p>Carga tu archivo...</p>
