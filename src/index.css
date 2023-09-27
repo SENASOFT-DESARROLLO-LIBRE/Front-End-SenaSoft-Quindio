@@ -234,7 +234,7 @@
 .contBtns > button:hover{
   background: linear-gradient(to right, #000000, #04D9D9);
 	color: white;
-	border: 1px solid white;
+	/* border: 1px solid white; */
 }
 
 

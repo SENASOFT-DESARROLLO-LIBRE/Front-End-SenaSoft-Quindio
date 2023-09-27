@@ -1,35 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, useMapEvents, Popup} from "react-leaflet"
+import React, { useContext, useEffect, useState } from 'react'
+import { MapContainer, TileLayer, Marker, useMapEvents, Popup, Polyline} from "react-leaflet"
 import { Icon } from 'leaflet';
 import "leaflet/dist/leaflet.css"
 // import "../../."
 import { useRef } from 'react';
-
+import { UserDataContext} from '../../Pages/Context/UserDataProvider'
 // import "./Map.css"
 
-export const Map = ({nameParking, latitud, longitud}) => {
+export const Map = ({latitud, longitud}) => {
+
+  // const [[newlat,newlng], setNewPoint] = useState(null)
+
+
   
   const marker = {
       geocode: [],
-      popUp: nameParking
     };
     const [markerLocation, setMarkerLocation] = useState(null);
     const markerRef = useRef(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false)
+    // const {updateUserData} = useContext(UserDataContext);
+    // const { userData } = useContext(UserDataContext);
 
       const AddMarkerOnClick = ({ setMarkerLocation }) => {
         useMapEvents({
           click: (e) => {
             setMarkerLocation(e.latlng);
+            // console.log(e.latlng.lat);
+            // setNewPoint(e.latlng)
+            // console.log(setNewPoint);
           },
         });
         if (markerRef.current) {
           markerRef.current.openPopup();
-          
         }
       
         return null;
       };
+
+
+
+      const addPoint = () =>{
+
+      }
+
+
+
+
+
       const [center, setCenter] = useState([4.805938, -75.756070])
     
       if (typeof latitud === 'number' && typeof longitud === 'number') {
@@ -75,7 +93,7 @@ export const Map = ({nameParking, latitud, longitud}) => {
               <p>¿Que acción desea realizar?</p>
               <div className="contBtns">
                 <button>Establecer Origen</button>
-                <button>Agregar Punto</button>
+                <button onClick={addPoint}>Agregar Punto</button>
               </div>
 
 
