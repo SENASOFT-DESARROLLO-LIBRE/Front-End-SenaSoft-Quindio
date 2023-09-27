@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { FormGroup } from '../../UI/FormGroup/Formgroup'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FormLogin } from '../FormLogin/FormLogin';
+
 export const MainLogin = () => {
 
     // Use Navigate para navegar entre las rutas
@@ -19,20 +21,24 @@ export const MainLogin = () => {
         setInputs({...inputs, [e.target.name]: e.target.value})
     }
 
-    const onSubmitLogin = async(typerole) => {
+    const onSubmitLogin = async(e) => {
+        e.preventDefault()
 
         const Usuario = {
           email, password
         };
+        console.log("entra");
        
         try {
             const response = await axios.post("http://localhost:5000/api/users/login", Usuario);
-            // const response = await axios.post("https://backend-space-parking.onrender.com/api/users/login", Usuario);
-           
-            navigate(`/Home`);
+
+            navigate(`/Home/`);
             console.log(response);
+            alert('entro correctamene')
           } catch (error) {
             console.log(error);
+            alert('error al entrar')
+
           }
         };
 
@@ -47,7 +53,7 @@ export const MainLogin = () => {
     const {name, emailCreate, passwordCreate, confirmPassword} = inputsCreate
 
     const onSaveData = (e) => {
-        setInputsCreate({ ...inputs, [e.target.name]: e.target.value });
+        setInputsCreate({ ...inputsCreate, [e.target.name]: e.target.value });
       };
 
 
@@ -64,6 +70,8 @@ export const MainLogin = () => {
         const confirmPassword = inputsCreate.confirmPassword;
         if (passwordCreate !== confirmPassword) {
             alert('Contraseña y confirmacion de contraseña no coinciden')
+            console.log(passwordCreate);
+            console.log(confirmPassword);
             return;
         }
         else{
@@ -71,28 +79,25 @@ export const MainLogin = () => {
         }
     }
     const sendUserData = (userData) => {
-        // return axios.post('http://localhost:5000/api/users/registerParking', userData);
-        return axios.post('https://backend-space-parking.onrender.com/api/users/registerParking', userData);
+        alert('cuenta creada')
+        console.log(userData);
+        return axios.post('http://localhost:5000/api/users/registerUser', userData);
       };
 
 
 
   return (
     <main id='mainLogin'>
-        <form id='formLogin' onSubmit={onSubmitLogin}>
-            <FormGroup onChange={(e) => getInput(e)} contLabel="Correo" place="Correo" nameInput="email" inputType="email"/>
-            <FormGroup onChange={(e) => getInput(e)} contLabel="Contraseña" place="Contraseña" nameInput="password" inputType="password"/>
-            
-           <button id='btnLogin' type='submit'>Iniciar Sesion</button>
-        </form>
+        <FormLogin/>
+        
 
 
 
         <form id='formCreate' onSubmit={sendData}>
-            <FormGroup onChange={onSaveData} contLabel="Nombre" place="Nombre" nameInput="name" inputType="Text"/>
-            <FormGroup onChange={onSaveData} contLabel="Correo" place="Correo" nameInput="email" inputType="email"/>
-            <FormGroup onChange={onSaveData} contLabel="Contraseña" place="Contraseña" nameInput="password" inputType="password"/>
-            <FormGroup onChange={onSaveData} nameInput="confirmPassword" contLabel="Confirmar Contraseña" place=" ConfirmarContraseña" inputType="password" />
+            <FormGroup onChange={(e) => onSaveData(e)} contLabel="Nombre" place="Nombre" nameInput="name" inputType="Text"/>
+            <FormGroup onChange={(e) => onSaveData(e)} contLabel="Correo" place="Correo" nameInput="emailCreate" inputType="email"/>
+            <FormGroup onChange={(e) => onSaveData(e)} contLabel="Contraseña" place="Contraseña" nameInput="passwordCreate" inputType="password"/>
+            <FormGroup onChange={(e) => onSaveData(e)} nameInput="confirmPassword" contLabel="Confirmar Contraseña" place=" ConfirmarContraseña" inputType="password" />
             
             
            <button id='btnCreateAccount' type='submit'>Crear Cuenta</button>

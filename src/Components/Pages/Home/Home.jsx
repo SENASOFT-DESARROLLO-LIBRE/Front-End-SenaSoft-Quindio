@@ -1,8 +1,10 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import { Map } from '../../Layouts/Map/Map'
+import axios from 'axios';
 import { FormGroup } from '../../UI/FormGroup/Formgroup'
 import { UserDataContext } from '../Context/UserDataProvider'
+
 
 
 export const Home = () => {
@@ -35,6 +37,8 @@ export const Home = () => {
             setGrafo(jsonData)
             findOrigin(jsonData)
             updateUserData(jsonData)
+            // console.log(jsonData);
+            upLocations(jsonData)
             makeRoute()
 
             // Ahora jsonData contiene el objeto JavaScript correspondiente al archivo JSON
@@ -46,7 +50,7 @@ export const Home = () => {
     
         reader.readAsText(jsonFile);
       } else {
-        console.log("No se encontró ningún archivo.");
+        // console.log("No se encontró ningún archivo.");
       }
     };
 
@@ -58,7 +62,7 @@ export const Home = () => {
 
     useEffect(() => {
       // Este efecto se activará cada vez que ubiOrigin cambie
-      console.log("ubiOrigin actualizado:", ubiOrigin);
+      // console.log("ubiOrigin actualizado:", ubiOrigin);
     }, [ubiOrigin]);
         
     const findOrigin =  (jsonData) => {
@@ -81,18 +85,29 @@ export const Home = () => {
       
     };
     
-    // if (jsonData && jsonData?.ubicaciones) {
-    //   const ubicacionEncontrada = jsonData?.ubicaciones.find((ubi) => ubi.nombre === grafo?.inicio);
-    //   // console.log(ubi.name);
+    const upLocations = async(filejson) =>{
+      const fileData = {
       
-    //   if (ubicacionEncontrada) {
-    //     setUbiOrigin(ubicacionEncontrada);
-    //   } else {
-    //     console.log(`No se encontró ninguna ubicación con el nombre ${jsonData.inicio}`);
-    //   }
-    // } else {
-    //   console.log('No hay datos de ubicación disponibles en el grafo.');
-    // }
+      }
+
+      try {
+        const response = await axios.post("http://localhost:5000/api/users/saveLocations", fileData)
+        console.log(response);
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+
+    }
+
+
+
+
+
+
+
+
 
     const makeRoute = () => {
       const grafo = {};

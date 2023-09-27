@@ -215,8 +215,6 @@
 
 .contBtns > button{
   width: 40%;
-  /* align-self: center; */
-  /* text-align: center; */
   background: linear-gradient(to right, #83f3d1, #40c9ff);
 	color: rgb(0, 0, 0);
 	font-size: 12px;
@@ -227,7 +225,6 @@
 	transition: transform 80ms ease-in;
 	margin-top: 20px;
   margin-bottom: 1rem;
-  /* align-self: center; */
   transition: .2s;
 }
 
@@ -259,3 +256,34 @@
   transition: border-color 0.2s;
 }
 
+#mainConfirm{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #212121;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+#mainConfirm > h1{
+  color: #04BF9D;
+  font-size: 3rem;
+}
+
+#btnConfirm{
+  border-radius: 10px;
+	background: linear-gradient(to right, #83f3d1, #04BF9D);
+	color: rgb(0, 0, 0);
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	margin-top: 20px;
+  margin-bottom: 2rem;
+  align-self: center;
+  transition: .2s;
+
+}
