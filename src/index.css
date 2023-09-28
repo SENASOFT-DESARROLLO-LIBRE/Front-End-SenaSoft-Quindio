@@ -88,6 +88,40 @@
   animation: gradient 5s ease infinite;
 }
 
+#formCreate{
+  width: 400px;
+  background: linear-gradient(#212121, #212121) padding-box,
+              linear-gradient(145deg, transparent 35%,#47f0bd, #40c9ff) border-box;
+  border: 2px solid transparent;
+  padding: 32px 24px;
+  font-size: 14px;
+  font-family: inherit;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background-size: 200% 100%;
+  animation: gradient 5s ease infinite;
+}
+
+#btnCreateAccount{
+  border-radius: 10px;
+	background: linear-gradient(to right, #83f3d1, #04BF9D);
+	color: rgb(0, 0, 0);
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	margin-top: 20px;
+  margin-bottom: 2rem;
+  align-self: center;
+  transition: .2s;
+}
+
 
 
 @keyframes gradient {

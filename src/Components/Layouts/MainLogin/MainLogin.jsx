@@ -94,6 +94,7 @@ export const MainLogin = () => {
 
 
         <form id='formCreate' onSubmit={sendData}>
+          <h2>Crea Tu Cuenta</h2>
             <FormGroup onChange={(e) => onSaveData(e)} contLabel="Nombre" place="Nombre" nameInput="name" inputType="Text"/>
             <FormGroup onChange={(e) => onSaveData(e)} contLabel="Correo" place="Correo" nameInput="emailCreate" inputType="email"/>
             <FormGroup onChange={(e) => onSaveData(e)} contLabel="Contraseña" place="Contraseña" nameInput="passwordCreate" inputType="password"/>

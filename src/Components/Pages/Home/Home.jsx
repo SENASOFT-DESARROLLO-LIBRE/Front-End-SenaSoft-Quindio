@@ -73,8 +73,8 @@ export const Home = () => {
         jsonData.ubicaciones.forEach((ubi) => {
           if (ubi?.nombre === jsonData?.inicio) {
             setUbiOrigin(ubi)
-            console.log(ubi);
-            console.log(ubiOrigin);
+            // console.log(ubi);
+            // console.log(ubiOrigin);
           }
           // console.log(ubi.nombre);
           // console.log(jsonData.inicio);
@@ -92,7 +92,7 @@ export const Home = () => {
 
       try {
         const response = await axios.post("http://localhost:5000/api/users/saveLocations", fileData)
-        console.log(response);
+        // console.log(response);
         
       } catch (error) {
         console.log(error);
@@ -171,12 +171,19 @@ export const Home = () => {
         console.log(`${ubicacion}: ${distances[ubicacion]}`);
       }
     };
-    
+
+    const [showDiv, setShowDiv] = useState(false);
+    const toggleDiv = () => {
+      setShowDiv(!showDiv);
+    };
 
     return (
       <div id='mainHome'>
         <Map latitud={ubiOrigin ? ubiOrigin.posY : 4.805938} longitud={ubiOrigin ? ubiOrigin.posX : -75.756070} />
           <aside className='asideHome'>
+          <div onClick={toggleDiv}className="contIcon">
+              <i  className='icon-user'></i>
+          </div>
             <h2>Puntos De Entrega</h2>
             <ul>
             {grafo ? (
