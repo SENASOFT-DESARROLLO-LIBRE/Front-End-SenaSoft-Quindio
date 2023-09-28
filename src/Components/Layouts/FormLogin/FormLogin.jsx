@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { FormGroup } from '../../UI/FormGroup/Formgroup';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export const FormLogin = () => {
@@ -50,6 +49,8 @@ export const FormLogin = () => {
             <FormGroup onChange={(e) => getInput(e)} contLabel="Contraseña" place="Contraseña" nameInput="passwordCreate" inputType="password"/>
             
            <button id='btnLogin' type='submit'>Iniciar Sesion</button>
+           <Link className="forgotPassword" to="/RecoverPassword" >¿Haz Olvidado tu contraseña?</Link>
+            
         </form>
   )
 }

@@ -89,6 +89,7 @@ export const MainLogin = () => {
   return (
     <main id='mainLogin'>
         <FormLogin/>
+        <img src="" alt="" />
         
 
 

@@ -102,13 +102,6 @@ export const Home = () => {
     }
 
 
-
-
-
-
-
-
-
     const makeRoute = () => {
       const grafo = {};
     
